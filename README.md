@@ -3,9 +3,9 @@
 </p>
 
 ----------
-<p align="center">
+
 🚢 **Hundir la Flota - ¡Demuestra tu estrategia naval!**
-</p>
+
 
 ¡Bienvenido a Hundir la Flota, el clásico juego de batallas navales donde pondrás a prueba tu estrategia y puntería! 🎯⚓
 
