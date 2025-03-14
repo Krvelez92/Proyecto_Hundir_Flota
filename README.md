@@ -1,3 +1,7 @@
+![Hundir la Flota](./1-Fundamentals/Python/img/TheBridge_logo.png)
+
+----------
+
 🚢 **Hundir la Flota - ¡Demuestra tu estrategia naval!**
 
 ¡Bienvenido a Hundir la Flota, el clásico juego de batallas navales donde pondrás a prueba tu estrategia y puntería! 🎯⚓
