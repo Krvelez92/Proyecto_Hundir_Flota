@@ -1,8 +1,11 @@
-![Hundir la Flota](./hundir-la-flota-juego.jpg)
+<p align="center">
+  <img src="hundir-la-flota-juego.jpg" alt="Hundir la Flota" />
+</p>
 
 ----------
-
+<p align="center">
 🚢 **Hundir la Flota - ¡Demuestra tu estrategia naval!**
+</p>
 
 ¡Bienvenido a Hundir la Flota, el clásico juego de batallas navales donde pondrás a prueba tu estrategia y puntería! 🎯⚓
 
