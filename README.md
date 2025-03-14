@@ -1,4 +1,4 @@
-![Hundir la Flota](./1-Fundamentals/Python/img/TheBridge_logo.png)
+![Hundir la Flota](./hundir-la-flota-juego.jpg)
 
 ----------
 
