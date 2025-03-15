@@ -330,10 +330,19 @@ def iniciar_juego(flota:dict={3:2, 2:3, 1:4}):
     tablero_user = crear_tablero()
     tablero_enemigo = crear_tablero()
     tablero_enemigo_v = crear_tablero()
-    print('Creando Tablero Usuario')
-    print('*'*115)
-    print('\n')
-    flota_usuario = llenar_tablero(flota, tablero_user, crear_barco)
+
+    tipo_tablero = input('¿Que prefieres: 1-Crear tu propio tablero o 2-Que se genere de forma aleatoria? Elige entre 1 o 2. ').strip()
+    if tipo_tablero == '1':
+        print('Creando Tablero Usuario')
+        print('*'*115)
+        print('\n')
+        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco)
+    else:
+        print('Creando Tablero Usuario')
+        print('*'*115)
+        print('\n')
+        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco_aleatorio)
+
     print('\n')
     print('Creando Tablero Enemigo')
     print('*'*115)
