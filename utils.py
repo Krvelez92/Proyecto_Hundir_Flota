@@ -167,12 +167,17 @@ def crear_barco_aleatorio(eslora:int):
 
 #----------------------------------------------------------------------------------------------------------------------------------
 
-def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion):
+def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion, tipo_usuario:str):
     ''' 
     Esta es una función que coloca los barcos en el tablero.
 
     Input:
         barco: list
+        tablero: array
+        eslora: int
+        flota_barcos: list
+        funcion
+        tipo_usuario: str
     
     Output:
         tablero: array
@@ -189,12 +194,21 @@ def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion):
             return colocar_barco(nuevo_barco, tablero, eslora, flota_barcos, funcion)
     
     #Rellenamos la casillas con los nuevos barcos
-    for casilla in barco:    
-        tablero[casilla] = 'O'
+    if tipo_usuario == 'user':
+        for casilla in barco:
+            tablero[casilla] = 'O'
+        print(barco)
+        print('\n')
+        print(tablero)
+        print('-'*115)
+        print('\n')
+    else:
+        for casilla in barco:
+            tablero[casilla] = 'O'
     return tablero
 #----------------------------------------------------------------------------------------------------------------------------------
 
-def llenar_tablero(flota:dict, tablero, funcion):
+def llenar_tablero(flota:dict, tablero, funcion, tipo_usuario):
     ''' 
     Esta es una función llena todo el tablero con la flota dada.
 
@@ -211,7 +225,7 @@ def llenar_tablero(flota:dict, tablero, funcion):
         for rep in range(num):
             barco = funcion(eslora)
             flota_barcos.append(barco)
-            colocar_barco(barco, tablero, eslora, flota_barcos, funcion)
+            colocar_barco(barco, tablero, eslora, flota_barcos, funcion, tipo_usuario)
         
     return flota_barcos
 
@@ -336,18 +350,18 @@ def iniciar_juego(flota:dict={3:2, 2:3, 1:4}):
         print('Creando Tablero Usuario')
         print('*'*115)
         print('\n')
-        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco)
+        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco, 'user')
     else:
         print('Creando Tablero Usuario')
         print('*'*115)
         print('\n')
-        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco_aleatorio)
+        flota_usuario = llenar_tablero(flota, tablero_user, crear_barco_aleatorio, 'user')
 
     print('\n')
     print('Creando Tablero Enemigo')
     print('*'*115)
     print('\n')
-    flota_enemigo = llenar_tablero(flota, tablero_enemigo, crear_barco_aleatorio)
+    flota_enemigo = llenar_tablero(flota, tablero_enemigo, crear_barco_aleatorio, 'enemigo')
     print('\n')
     time.sleep(2)
     imprimir(tablero_user, tablero_enemigo_v), 
