@@ -16,8 +16,7 @@ Resumen:
  - crear_barco(eslora:int)
  - crear_barco_aleatorio(eslora:int)
  - colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion)
- - llenar_tablero_user(flota:dict, tablero)
- - llenar_tablero_enemigo(flota:dict, tablero)
+ - llenar_tablero(flota:dict, tablero, funcion)
  - imprimir(tablero_user, tablero_enemigo_v)
  - disparar(casilla:tuple, tablero, tablero_v, flota:list)
  - validacion_tablero(tablero)
@@ -54,18 +53,18 @@ def crear_barco(eslora:int):
         barco: list
     '''
     # Input Usuario primera posicion del barco
-    barco = input(f'Ingresa la posición inicia de tu barco eslora {eslora}.\nRecuerda el formato a seguir: ejemplo --> 0,1 ').strip()
+    barco = input(f'Ingresa la posición inicia de tu barco eslora {eslora}.\nRecuerda el formato a seguir: ejemplo --> 0,1  ').strip()
     try:
         barco =  list(barco.split(','))
         barco = [tuple([int(x) for x in barco])]
     except:
         print(f'El formato ingresado no es el correcto vuelve a intentarlo.')
-        barco = input(f'Ingresa la posición inicia de tu barco eslora {eslora}.\nRecuerda el formato a seguir: ejemplo --> 0,1 ').strip()
+        barco = input(f'Ingresa la posición inicia de tu barco eslora {eslora}.\nRecuerda el formato a seguir: ejemplo --> 0,1  ').strip()
         barco =  list(barco.split(','))
         barco = [tuple([int(x) for x in barco])]
 
     # Input Usuario orientacion del barco
-    posicion = input('Ingresa la orientación del barco. Los valores posibles son: Norte, Sur, Este y Oeste. Elige uno y escribelo. ').lower().strip()
+    posicion = input('Ingresa la orientación del barco. Los valores posibles son: Norte, Sur, Este y Oeste. Elige uno y escribelo.  ').lower().strip()
     posicion = posicion.lower().strip()
 
     # Rellenar barco segun su eslora.
@@ -191,17 +190,18 @@ def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion):
     
     #Rellenamos la casillas con los nuevos barcos
     for casilla in barco:    
-        tablero[casilla] = 'O'   
+        tablero[casilla] = 'O'
     return tablero
-
 #----------------------------------------------------------------------------------------------------------------------------------
 
-def llenar_tablero_user(flota:dict, tablero):
+def llenar_tablero(flota:dict, tablero, funcion):
     ''' 
     Esta es una función llena todo el tablero con la flota dada.
 
     Input:
         flota: dict
+        tablero: array
+        funcion
     
     Output:
         flota_barcos: list
@@ -209,31 +209,9 @@ def llenar_tablero_user(flota:dict, tablero):
     flota_barcos = []
     for num, eslora in flota.items():
         for rep in range(num):
-            barco = crear_barco(eslora)
+            barco = funcion(eslora)
             flota_barcos.append(barco)
-            colocar_barco(barco, tablero, eslora, flota_barcos, crear_barco)
-            print(flota_barcos)
-        
-    return flota_barcos
-
-#----------------------------------------------------------------------------------------------------------------------------------
-
-def llenar_tablero_enemigo(flota:dict, tablero):
-    ''' 
-    Esta es una función llena todo el tablero con la flota dada.
-
-    Input:
-        flota: dict
-    
-    Output:
-        flota_barcos: list
-    '''
-    flota_barcos = []
-    for num, eslora in flota.items():
-        for rep in range(num):
-            barco = crear_barco_aleatorio(eslora)
-            flota_barcos.append(barco)
-            colocar_barco(barco, tablero, eslora, flota_barcos, crear_barco_aleatorio)
+            colocar_barco(barco, tablero, eslora, flota_barcos, funcion)
         
     return flota_barcos
 
@@ -251,9 +229,9 @@ def imprimir(tablero_user, tablero_enemigo_v):
         None   
     '''
     print('\t\t\tHundir la Flota')
-    print('*'*65)
+    print('*'*115)
     print('\n')
-    print(f"{'':<2} {'User':^15} {'':<15} {'Enemigo':^30}")  
+    print(f"{'':<3} {'User':^15} {'':<14} {'Enemigo':^30}")  
     print('-' * 23 + ' '*16 + '-' * 20)  
     columnas = "  " + " ".join(str(i) for i in range(10))
     print(" " + columnas + " " * 15 + columnas)
@@ -353,12 +331,14 @@ def iniciar_juego(flota:dict={3:2, 2:3, 1:4}):
     tablero_enemigo = crear_tablero()
     tablero_enemigo_v = crear_tablero()
     print('Creando Tablero Usuario')
-    print('*'*65)
-    flota_usuario = llenar_tablero_user(flota, tablero_user)
+    print('*'*115)
+    print('\n')
+    flota_usuario = llenar_tablero(flota, tablero_user, crear_barco)
     print('\n')
     print('Creando Tablero Enemigo')
-    print('*'*65)
-    flota_enemigo = llenar_tablero_enemigo(flota, tablero_enemigo)
+    print('*'*115)
+    print('\n')
+    flota_enemigo = llenar_tablero(flota, tablero_enemigo, crear_barco_aleatorio)
     print('\n')
     time.sleep(2)
     imprimir(tablero_user, tablero_enemigo_v), 
@@ -378,14 +358,15 @@ def turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:l
     Output:
         disparo: str
     '''
-    casilla_disparo = input('Es tu turno, elige una casilla para disparar ¡Vamos a por el enemigo!\nRecuerda el formato a seguir: ejemplo --> 0,1').strip()
+    casilla_disparo = input('Es tu turno, elige una casilla para disparar ¡Vamos a por el enemigo!\nRecuerda el formato a seguir: ejemplo --> 0,1  ').strip()
     casilla =  list(casilla_disparo.split(','))
     casilla = tuple([int(x) for x in casilla])
     disparo = disparar(casilla, tablero_enemigo, tablero_enemigo_v, flota_enemigo)
     print(casilla, disparo)
+    print('\n')
     imprimir(tablero_user, tablero_enemigo_v)
     print('\n')
-    print('-'*65)
+    print('-'*115)
     return disparo
 
 #----------------------------------------------------------------------------------------------------------------------------------
@@ -396,21 +377,41 @@ def turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list):
 
     Input:
         tablero_user: array
+        tablero_enemigo_v: array
         flota_user: list
     
     Output:
         disparo: str
     '''
-    fila = random.randint(0,9)
-    columna = random.randint(0,9)
-    casilla = (fila, columna)
+    puntos = []
+
+    for index, fila in enumerate(tablero_user):
+        for j, i in enumerate(fila):
+            if i == 'X':
+                puntos.append((index, j))
+
+    if len(puntos) > 0 :
+        punto = random.choice(puntos)
+        posibles_mov = [(punto[0], punto[1]-1), (punto[0], punto[1]+1), (punto[0]+1, punto[1]), (punto[0]-1, punto[1])]
+        posibles_mov_real = []
+
+        for i in posibles_mov:
+            if (i[0] >= 0 and i[0] <= 9)  and (i[1] >= 0 and i[1] <= 9):
+                if tablero_user[i] == '~' or tablero_user[i] == 'O':
+                    posibles_mov_real.append(i)
+        casilla = random.choice(posibles_mov_real)
+    else:
+        fila = random.randint(0,9)
+        columna = random.randint(0,9)
+        casilla = (fila, columna)
+
     disparo = disparar(casilla, tablero_user, tablero_user, flota_user)
     print(casilla, disparo)
+    print('\n')
     imprimir(tablero_user, tablero_enemigo_v)
     print('\n')
-    print('-'*66)
+    print('-'*115)
     return disparo
-
 #----------------------------------------------------------------------------------------------------------------------------------
 
 def juego(flota:dict={3:2, 2:3, 1:4}):
@@ -427,9 +428,9 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
     print('\n')
     print('\n')
 
-    # print(flota_enemigo)
+    print(flota_enemigo)
 
-    # print(flota_usuario)
+    print(flota_usuario)
 
     while validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo):
         disparo = turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo)
@@ -445,7 +446,7 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
         if not (validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo)):
             break
     
-        print('Turno de tu Enemigo')
+        print('Turno de tu Enemigo!')
         disparo = turno_enemigo(tablero_user, tablero_enemigo_v, flota_usuario)
         time.sleep(1)
         
@@ -480,7 +481,8 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
         print("  *   /___\\   *  ")
         print("   *         *   ")
         print("    *_______*    ")
-    
-    jugar_de_nuevo = input('¿Quieres jugar de nuevo S/N?')
+    print('\n')
+    jugar_de_nuevo = input('¿Quieres jugar de nuevo S/N? ')
     if jugar_de_nuevo.upper().strip() == 'S':
+        print('\n')
         juego(flota)    
