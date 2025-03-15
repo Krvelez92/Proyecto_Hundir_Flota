@@ -191,7 +191,7 @@ def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion, t
             flota_barcos.remove(barco)
             nuevo_barco = funcion(eslora)
             flota_barcos.append(nuevo_barco)
-            return colocar_barco(nuevo_barco, tablero, eslora, flota_barcos, funcion)
+            return colocar_barco(nuevo_barco, tablero, eslora, flota_barcos, funcion, tipo_usuario)
     
     #Rellenamos la casillas con los nuevos barcos
     if tipo_usuario == 'user':
@@ -385,6 +385,7 @@ def turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:l
     casilla =  list(casilla_disparo.split(','))
     casilla = tuple([int(x) for x in casilla])
     disparo = disparar(casilla, tablero_enemigo, tablero_enemigo_v, flota_enemigo)
+    print('\n')
     print(casilla, disparo)
     print('\n')
     imprimir(tablero_user, tablero_enemigo_v)
@@ -414,21 +415,24 @@ def turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list):
                 puntos.append((index, j))
 
     if len(puntos) > 0 :
-        punto = random.choice(puntos)
-        posibles_mov = [(punto[0], punto[1]-1), (punto[0], punto[1]+1), (punto[0]+1, punto[1]), (punto[0]-1, punto[1])]
-        posibles_mov_real = []
+        for punto in puntos:
+            posibles_mov = [(punto[0], punto[1]-1), (punto[0], punto[1]+1), (punto[0]+1, punto[1]), (punto[0]-1, punto[1])]
+            posibles_mov_real = []
 
-        for i in posibles_mov:
-            if (i[0] >= 0 and i[0] <= 9)  and (i[1] >= 0 and i[1] <= 9):
-                if tablero_user[i] == '~' or tablero_user[i] == 'O':
-                    posibles_mov_real.append(i)
-        casilla = random.choice(posibles_mov_real)
+            for i in posibles_mov:
+                if (i[0] >= 0 and i[0] <= 9)  and (i[1] >= 0 and i[1] <= 9):
+                    if tablero_user[i] == '~' or tablero_user[i] == 'O':
+                        posibles_mov_real.append(i)
+            if len(posibles_mov_real) != 0 :
+                casilla = random.choice(posibles_mov_real) 
+
     else:
         fila = random.randint(0,9)
         columna = random.randint(0,9)
         casilla = (fila, columna)
 
     disparo = disparar(casilla, tablero_user, tablero_user, flota_user)
+    print('\n')
     print(casilla, disparo)
     print('\n')
     imprimir(tablero_user, tablero_enemigo_v)
@@ -470,6 +474,7 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
             break
     
         print('Turno de tu Enemigo!')
+        print('\n')
         disparo = turno_enemigo(tablero_user, tablero_enemigo_v, flota_usuario)
         time.sleep(1)
         
@@ -484,6 +489,7 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
             break
     
     print('Tu turno!!!')
+    print('\n')
 
     # Evaluar el resultado final
     if validacion_tablero(tablero_user):
