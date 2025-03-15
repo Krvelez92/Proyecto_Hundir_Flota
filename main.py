@@ -20,6 +20,6 @@ print('Iniciemos!!')
 time.sleep(3)
 
 flota = {2:3}
-
-tablero_user, tablero_enemigo, tablero_enemigo_v, flota_usuario, flota_enemigo = u.iniciar_juego(flota)
+1.2
+u.juego(flota)
 
