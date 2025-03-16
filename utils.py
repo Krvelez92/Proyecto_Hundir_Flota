@@ -24,6 +24,7 @@ Resumen:
  - turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:list)
  - turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list)
  - juego(flota:dict={3:2, 2:3, 1:4})
+
 '''
 #----------------------------------------------------------------------------------------------------------------------------------
 
@@ -44,7 +45,7 @@ def crear_tablero(tamaño:tuple=(10,10)):
 
 def crear_barco(eslora:int):
     ''' 
-    Esta es una función que crea los barcos del usuario.
+    Esta es una función que crea los barcos de forma manual.
 
     Input:
         eslora: int
@@ -121,6 +122,15 @@ def crear_barco(eslora:int):
 #----------------------------------------------------------------------------------------------------------------------------------
 
 def crear_barco_aleatorio(eslora:int):
+    ''' 
+    Esta es una función que crea los barcos de forma aleatoria.
+
+    Input:
+        eslora: int
+    
+    Output:
+        barco_aleatorio: list
+    '''
     fila = random.randint(0,9)
     columna = random.randint(0,9)
     barco_aleatorio = [(fila, columna)]
@@ -169,7 +179,7 @@ def crear_barco_aleatorio(eslora:int):
 
 def colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion, tipo_usuario:str):
     ''' 
-    Esta es una función que coloca los barcos en el tablero.
+    Esta es una función que coloca los barcos en el tablero y valida si se superpone.
 
     Input:
         barco: list
@@ -216,6 +226,7 @@ def llenar_tablero(flota:dict, tablero, funcion, tipo_usuario):
         flota: dict
         tablero: array
         funcion
+        tipo_usuario: str
     
     Output:
         flota_barcos: list
@@ -266,6 +277,7 @@ def disparar(casilla:tuple, tablero, tablero_v, flota:list):
         tablero: array
         tablero_v: array
         flota: list
+
     Output:
         valor: str
     '''
@@ -376,6 +388,7 @@ def turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:l
     Input:
         tablero_enemigo: array
         tablero_enemigo_v: array
+        tablero_user: array
         flota_enemigo: list
     
     Output:
