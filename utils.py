@@ -12,18 +12,24 @@ import time
 
 ''' 
 Resumen:
- - crear_tablero(tamaño:tuple=(10,10))
- - crear_barco(eslora:int)
- - crear_barco_aleatorio(eslora:int)
- - colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion)
- - llenar_tablero(flota:dict, tablero, funcion)
- - imprimir(tablero_user, tablero_enemigo_v)
- - disparar(casilla:tuple, tablero, tablero_v, flota:list)
- - validacion_tablero(tablero)
- - iniciar_juego(flota:dict={3:2, 2:3, 1:4})
- - turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:list)
- - turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list)
- - juego(flota:dict={3:2, 2:3, 1:4})
+
+Creación de Tableros y Barcos:
+    - crear_tablero(tamaño:tuple=(10,10))
+    - crear_barco(eslora:int)
+    - crear_barco_aleatorio(eslora:int)
+    - colocar_barco(barco:list, tablero, eslora:int, flota_barcos:list, funcion)
+    - llenar_tablero(flota:dict, tablero, funcion)
+
+Interacción del Juego:
+    - imprimir(tablero_user, tablero_enemigo_v)
+    - disparar(casilla:tuple, tablero, tablero_v, flota:list)
+    - validacion_tablero(tablero)
+
+ Ejecución del Juego:
+    - iniciar_juego(flota:dict={3:2, 2:3, 1:4})
+    - turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo:list)
+    - turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list)
+    - juego(flota:dict={3:2, 2:3, 1:4})
 
 '''
 #----------------------------------------------------------------------------------------------------------------------------------
