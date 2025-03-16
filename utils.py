@@ -474,28 +474,31 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
     print('\n')
     print('\n')
 
-    print(flota_enemigo)
+    # print(flota_enemigo)
 
-    print(flota_usuario)
+    # print(flota_usuario)
 
     while validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo):
+        time.sleep(2)
         disparo = turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo)
-        time.sleep(1)
+        time.sleep(2)
     
         while disparo == 'X' or disparo == 'Z':
             if not (validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo)):
                 break
             else: 
+                time.sleep(2)
                 disparo = turno_user(tablero_enemigo, tablero_enemigo_v, tablero_user, flota_enemigo)
-                time.sleep(1)
+                time.sleep(2)
     
         if not (validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo)):
             break
     
         print('Turno de tu Enemigo!')
         print('\n')
+        time.sleep(2)
         disparo = turno_enemigo(tablero_user, tablero_enemigo_v, flota_usuario)
-        time.sleep(1)
+        time.sleep(2)
         
         while disparo == 'X' or disparo == 'Z':
             if not (validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo)):
