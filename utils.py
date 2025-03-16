@@ -317,18 +317,18 @@ def disparar(casilla:tuple, tablero, tablero_v, flota:list):
             else:            
                 print('Hundido, vuelve a disparar.')
                 print("""
-                    ______
-                 .-'      '-.
+                     ______
+                  .-'      '-.
                 /            \\
                 |              |
                 |,  .-.  .-.  ,|
                 | )(_o/  \\o_)( |
                 |/     /\\     \\|
                 (_     ^^     _)
-                \\__|IIIIII|__/
-                 | \\IIIIII/ |
-                 \\          /
-                  `--------`
+                 \\__|IIIIII|__/
+                  | \\IIIIII/ |
+                  \\          /
+                   `--------`
                 """)
 
         elif tablero[casilla] == 'X':

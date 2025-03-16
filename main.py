@@ -20,8 +20,9 @@ print('Iniciemos!!')
 print('\n')
 time.sleep(2)
 
-flota = {2:3}
-#flota = {3:2, 2:3, 1:4}
+#flota = {2:3}
+flota = {3:2, 2:3, 1:4}
 
 u.juego(flota)
+
 
