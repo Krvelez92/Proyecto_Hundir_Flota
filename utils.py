@@ -499,9 +499,9 @@ def juego(flota:dict={3:2, 2:3, 1:4}):
     print('\n')
     print('\n')
 
-    print(flota_enemigo)
+    # print(flota_enemigo)
 
-    print(flota_usuario)
+    # print(flota_usuario)
 
     while validacion_tablero(tablero_user) and validacion_tablero(tablero_enemigo):
         time.sleep(2)
