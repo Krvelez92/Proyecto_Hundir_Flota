@@ -471,9 +471,21 @@ def turno_enemigo(tablero_user, tablero_enemigo_v, flota_user:list):
                 casilla = random.choice(posibles_mov_real) 
 
     else:
+        puntos = []
+
+        for index, fila in enumerate(tablero_user):
+            for j, i in enumerate(fila): 
+                if i == 'X' or i == 'Z' or i == 'A':
+                    puntos.append((index, j))
+        
         fila = random.randint(0,9)
         columna = random.randint(0,9)
         casilla = (fila, columna)
+
+        while casilla in puntos:
+            fila = random.randint(0,9)
+            columna = random.randint(0,9)
+            casilla = (fila, columna)
 
     disparo = disparar(casilla, tablero_user, tablero_user, flota_user)
     print('\n')
